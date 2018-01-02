@@ -97,6 +97,20 @@ for i, j in zip(str0, str1) :
 
 print (str2)      # パタトクカシーー
 ```
+または
+```
+#!/usr/local/bin python3.6
+# -*- coding: utf-8 -*-
+
+str = ""
+tuple0 = tuple("パトカー")
+tuple1 = tuple("タクシー")
+
+for i,j in zip(tuple0, tuple1) :
+    str = str + i + j
+
+print (str)
+```
 #### 解説
 まずは間違いから。ここでは、タプル（tuple）と for loop を利用しようとしました。タプルとは、イミュータブル（不変の）リストのことです。
 参考：[【Python入門】リストとの違いは？タプルの使い方まとめ | 侍エンジニア塾ブログ | プログラミング入門者向け学習情報サイト](https://www.sejuku.net/blog/23964)
@@ -141,7 +155,7 @@ print (str2)
 ```
 冷静に考えればその通りなので、複数の値（i,j）を同時に処理できるようにしなければいけなさそうです。調べて見ると、`zip()`を使ってあげることでスマートに書けるようです。`zip()`は複数のシーケンスに並行して同時にアクセスするforループを作るのに便利な関数。
 
-`zip()`を使うことで、回答例のようになりました。
+`zip()`を使うことで、回答例のように文字列を連結するパターンとタプルを活かしたパターンをつくることができました。
 ### 03. 円周率
 #### 問題
 "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."という文を単語に分解し，各単語の（アルファベットの）文字数を先頭から出現順に並べたリストを作成せよ．
