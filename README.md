@@ -161,15 +161,68 @@ print (str2)
 "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."という文を単語に分解し，各単語の（アルファベットの）文字数を先頭から出現順に並べたリストを作成せよ．
 #### 回答
 ```
+#!/usr/local/bin python3.6
+# -*- coding: utf-8 -*-
+
+str = "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."
+str = str.replace('.', "")
+str = str.replace(',', "")
+str = str.split()
+
+list = []
+for i in str:
+    list.append(len(i))
+
+print (list)
+
+# 結果
+# [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9]
+
 ```
 #### 解説
+まず、`,`と`.`は邪魔なので`replace`を使って除去します。次に、`split`を使って単語ごとに分割します。`split`は引数なしだとスペースやタブで自動的に分割されます。引数にダブルクオートで囲った文字を入れると、区切り文字を指定することができます。
+
+文字数を格納するリストを用意します。そこにfor文で格納していくわけですが、`len`を使って文字数をカウント、それを`append`を使ってリストに追加しています。
+
 ### 04. 元素記号
 #### 問題
 "Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can."という文を単語に分解し，1, 5, 6, 7, 8, 9, 15, 16, 19番目の単語は先頭の1文字，それ以外の単語は先頭に2文字を取り出し，取り出した文字列から単語の位置（先頭から何番目の単語か）への連想配列（辞書型もしくはマップ型）を作成せよ．
 #### 回答
 ```
+#!/usr/local/bin python3.6
+# -*- coding: utf-8 -*-
+
+str = "Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can."
+str = str.replace('.', "")
+str = str.replace(',', "")
+str = str.split()
+
+single = [1, 5, 6, 7, 8, 9, 15, 16, 19]
+
+dict = {}
+
+for (num, word) in enumerate(str,1):
+    if num in single:
+        dict[num] = word[:1]
+    else:
+        dict[num] = word[:2]
+
+print (dict)
+# print (sorted(dict.items()))
+# 結果
+# {1: 'H', 2: 'He', 3: 'Li', 4: 'Be', 5: 'B', 6: 'C', 7: 'N', 8: 'O', 9: 'F', 10: 'Ne', 11: 'Na', 12: 'Mi', 13: 'Al', 14: 'Si', 15: 'P', 16: 'S', 17: 'Cl', 18: 'Ar', 19: 'K', 20: 'Ca'}
+
 ```
 #### 解説
+辞書型を使います。辞書型（dict）とは、キー（名前）と値をセットにして扱うデータ形式のこと。キーを指定することで値を取り出すことができます。
+
+for文では`enumerate`関数を使います。`enumerate`関数を使うとループする際にインデックスつきで要素を得ることができます。引数に数値を指定することで、カウントアップの数値の起点を指定する事ができます。今回は`1`からスタートです。
+
+次にif文でリストにある要素と一致した場合を条件としたいので、`in`を使えばよさそうです。
+参考：[リスト内に特定の要素があるかでif分岐 - Qiita](https://qiita.com/clarinet758/items/43fdc786685e7c13abf5)
+
+辞書への値の追加は`辞書[キー] = 値`で追加、更新ができます。キーは数字で、値を元素にします。結果、1から順に元素が並んで出力されました。元素をキーにすると順番がバラバラになるので、その場合は`sorted`を使って並び替えてあげるとわかりやすそうです。順番はばらばらでも、課題としては正解です。
+
 ### 05. n-gram
 #### 問題
 与えられたシーケンス（文字列やリストなど）からn-gramを作る関数を作成せよ．この関数を用い，"I am an NLPer"という文から単語bi-gram，文字bi-gramを得よ．
