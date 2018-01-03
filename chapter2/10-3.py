@@ -1,16 +1,11 @@
 #!/usr/local/bin python3.6
 # -*- coding: utf-8 -*-
-# 10-1.py
-
-import sys
+# 10-3.py
 
 file = "./hightemp.txt"
-f = open(file)
 count = 1
-for i in f.readline():
+for lines in file:
     count += 1
-f.close()
-
 print(count)
 # 結果
-# 23
+# 15

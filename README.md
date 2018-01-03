@@ -364,7 +364,7 @@ print(tenki(x,y,z))
 その他の文字はそのまま出力
 この関数を用い，英語のメッセージを暗号化・復号化せよ．
 #### 回答
-```
+```python
 #!/usr/local/bin python3.6
 # -*- coding: utf-8 -*-
 
@@ -399,7 +399,7 @@ print(cipher(coded))
 #### 問題
 スペースで区切られた単語列に対して，各単語の先頭と末尾の文字は残し，それ以外の文字の順序をランダムに並び替えるプログラムを作成せよ．ただし，長さが４以下の単語は並び替えないこととする．適当な英語の文（例えば"I couldn't believe that I could actually understand what I was reading : the phenomenal power of the human mind ."）を与え，その実行結果を確認せよ．
 #### 回答
-```
+```python
 #!/usr/local/bin python3.6
 # -*- coding: utf-8 -*-
 
@@ -443,11 +443,67 @@ hightemp.txt
 root@687baf7b1c81:/share/chapter2# wc -l hightemp.txt
 24 hightemp.txt
 ```
-Python のコードはこちら。
-```
+Python のコードはこちら。３つ書いてみたけどうまくいったのは「10-2.py」だけでした。
+```python
+#!/usr/local/bin python3.6
+# -*- coding: utf-8 -*-
+# 10-1.py
+
+import sys
+
+file = "./hightemp.txt"
+f = open(file)
+count = 1
+for i in f.readline():
+    count += 1
+f.close()
+
+print(count)
+# 結果
+# 23
 
 ```
+```python
+#!/usr/local/bin python3.6
+# -*- coding: utf-8 -*-
+# 10-2.py
+
+import sys
+
+file = "./hightemp.txt"
+f = open(file)
+lines = f.readlines()
+f.close()
+
+print(len(lines))
+# 結果
+# 24
+```
+```python
+#!/usr/local/bin python3.6
+# -*- coding: utf-8 -*-
+# 10-3.py
+
+file = "./hightemp.txt"
+count = 1
+for lines in file:
+    count += 1
+print(count)
+# 結果
+# 15
+```
 #### 解説
+ファイル操作をする際には`import sys`を読み込み、ファイルを開く`open`、行を読み込む`read`, `readline`, `readlines`、ファイルを閉じる`close`が利用できます。
+
+「10-1.py」では、`readline`をつかって１行ずつ読み込みましたが、２３行しかカウントできていません。（[Issue #1](https://github.com/skksky/Python-Exercises/issues/1)）
+
+「10-2.py」では、`readlines`を使ってすべての行を一気に読み込み、その長さを`len()`を使ってカウントしています。なお、`readlines`では、以下のようなリスト形式でファイルが読み込まれます。これはうまくいきました。
+
+```shell
+['高知県\t江川崎\t41\t2013-08-12\n', '埼玉県\t熊谷\t40.9\t2007-08-16\n', '岐阜県\t多治見\t40.9\t2007-08-16\n', '山形県\t山形\t40.8\t1933-07-25\n', '山梨県\t甲府\t40.7\t2013-08-10\n', '和歌山県\tかつらぎ\t40.6\t1994-08-08\n', '静岡県\t天竜\t40.6\t1994-08-04\n', '山梨県\t勝沼\t40.5\t2013-08-10\n', '埼玉県\t越谷\t40.4\t2007-08-16\n', '群馬県\t館林\t40.3\t2007-08-16\n', '群馬県\t上里見\t40.3\t1998-07-04\n', '愛知県\t愛西\t40.3\t1994-08-05\n', '千葉県\t牛久\t40.2\t2004-07-20\n', '静岡県\t佐久間\t40.2\t2001-07-24\n', '愛媛県\t宇和島\t40.2\t1927-07-22\n', '山形県\t酒田\t40.1\t1978-08-03\n', '岐阜県\t美濃\t40\t2007-08-16\n', '群馬県\t前橋\t40\t2001-07-24\n', '千葉県\t茂原\t39.9\t2013-08-11\n', '埼玉県\t鳩山\t39.9\t1997-07-05\n', '大阪府\t豊中\t39.9\t1994-08-08\n', '山梨県\t大月\t39.9\t1990-07-19\n', '山形県\t鶴岡\t39.9\t1978-08-03\n', '愛知県\t名古屋\t39.9\t1942-08-02\n']
+```
+「10-3.py」では、[7. 入力と出力 — Python 3.6.3 ドキュメント](https://docs.python.jp/3/tutorial/inputoutput.html) の情報を見てやってみたのですが、なんと１５という結果が返ってきました。これは理由が検討もつきません。。。
+
 ### 11. タブをスペースに置換
 #### 問題
 タブ1文字につきスペース1文字に置換せよ．確認にはsedコマンド，trコマンド，もしくはexpandコマンドを用いよ．
