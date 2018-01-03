@@ -273,6 +273,10 @@ for i in range(0,last_word):
 
 あとは、この関数`ngram`で得られた結果（return）を表示してあげるだけです。
 
+この課題は全く分からなかったので以下サイトを参考に読み解きました。
+
+参考：[言語処理100本ノック with Python（第1章） - Qiita](https://qiita.com/gamma1129/items/37bf660cf4e4b21d4267)
+
 ### 06. 集合
 #### 問題
 "paraparaparadise"と"paragraph"に含まれる文字bi-gramの集合を，それぞれ, XとYとして求め，XとYの和集合，積集合，差集合を求めよ．さらに，'se'というbi-gramがXおよびYに含まれるかどうかを調べよ．
