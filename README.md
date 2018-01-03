@@ -20,7 +20,7 @@ Python のバージョンは`Python 3.6.4`です。
 
 ### はじめに
 文字列の表示には`print`関数を使う。（Python3の場合）
-```
+```python
 #!/usr/local/bin python3.6
 # -*- coding: utf-8 -*-
 
@@ -32,7 +32,7 @@ print (str)         # stressed を表示
 #### 問題
 文字列"stressed"の文字を逆に（末尾から先頭に向かって）並べた文字列を得よ．
 #### 答え
-```
+```python
 #!/usr/local/bin python3.6
 # -*- coding: utf-8 -*-
 
@@ -44,20 +44,20 @@ print (str[::-1])   # desserts を表示
 スライスというテクニックを使うらしい。
 
 `str[数字]`で、先頭から数字に入れた文字目を表示する。`0`だったら`s`が表示される。負の数を入力することもでき、逆順に数える。今回の例だと、`str[7]`と`str[-1]`は同義となる。
-```
+```python
 str[0]        # 's'
 str[7]        # 'd'
 str[-1]       # 'd'
 ```
 `:`を使って範囲指定をする。範囲の終わりの文字は結果に表示されないので注意。
-```
+```python
 str[1:3]      # 'tr'
 str[0:-3]     # 'stres'
 str[:4]       # 'stre'
 str[4:]       # 'ssed'
 ```
 もうひとつ`:`をつけることで、ステップ数を表すことができる。
-```
+```python
 str[0:6:2]    # 'srs', 0番目から6番目を2つ飛ばしで。
 str[::3]      # 'see', 全体を3つ飛ばしで。
 str[-3::2]    # 'sd'，負の数も指定可能。後ろから3番目から2つ飛ばしで。
@@ -69,7 +69,7 @@ str[::-3]     # 'dst'，ステップ数を負の数にすると逆順に全体�
 #### 問題
 「パタトクカシーー」という文字列の1,3,5,7文字目を取り出して連結した文字列を得よ．
 #### 回答
-```
+```python
 #!/usr/local/bin python3.6
 # -*- coding: utf-8 -*-
 
@@ -84,7 +84,7 @@ print (str[::2])    # パトカー
 #### 問題
 「パトカー」＋「タクシー」の文字を先頭から交互に連結して文字列「パタトクカシーー」を得よ．
 #### 回答
-```
+```python
 #!/usr/local/bin python3.6
 # -*- coding: utf-8 -*-
 
@@ -98,7 +98,7 @@ for i, j in zip(str0, str1) :
 print (str2)      # パタトクカシーー
 ```
 または
-```
+```python
 #!/usr/local/bin python3.6
 # -*- coding: utf-8 -*-
 
@@ -113,10 +113,11 @@ print (str)
 ```
 #### 解説
 まずは間違いから。ここでは、タプル（tuple）と for loop を利用しようとしました。タプルとは、イミュータブル（不変の）リストのことです。
+
 参考：[【Python入門】リストとの違いは？タプルの使い方まとめ | 侍エンジニア塾ブログ | プログラミング入門者向け学習情報サイト](https://www.sejuku.net/blog/23964)
 
 `tuple()`を使うことで、タプルを作る事ができます。
-```
+```python
 # 文字列を変数に格納
 str0 = "パトカー"
 str1 = "タクシー"
@@ -129,7 +130,7 @@ tuple1 = tuple(str1)
 print (tuple1)      # ('タ', 'ク', 'シ', 'ー')
 ```
 これをfor文で取り出してあげればOKと思いましたが、このように書いてしまっておかしなこととなりました。
-```
+```python
 #!/usr/local/bin python3.6
 # -*- coding: utf-8 -*-
 
@@ -160,7 +161,7 @@ print (str2)
 #### 問題
 "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."という文を単語に分解し，各単語の（アルファベットの）文字数を先頭から出現順に並べたリストを作成せよ．
 #### 回答
-```
+```python
 #!/usr/local/bin python3.6
 # -*- coding: utf-8 -*-
 
@@ -188,7 +189,7 @@ print (list)
 #### 問題
 "Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can."という文を単語に分解し，1, 5, 6, 7, 8, 9, 15, 16, 19番目の単語は先頭の1文字，それ以外の単語は先頭に2文字を取り出し，取り出した文字列から単語の位置（先頭から何番目の単語か）への連想配列（辞書型もしくはマップ型）を作成せよ．
 #### 回答
-```
+```python
 #!/usr/local/bin python3.6
 # -*- coding: utf-8 -*-
 
@@ -228,7 +229,7 @@ for文では`enumerate`関数を使います。`enumerate`関数を使うとル�
 #### 問題
 与えられたシーケンス（文字列やリストなど）からn-gramを作る関数を作成せよ．この関数を用い，"I am an NLPer"という文から単語bi-gram，文字bi-gramを得よ．
 #### 回答
-```
+```python
 #!/usr/local/bin python3.6
 # -*- coding: utf-8 -*-
 
@@ -258,7 +259,7 @@ print(ngram(str.split(),2))
 
 `last_word`は、入力された文字列の長さからngramで取り出したい文字数を引いて1加えたものです。これがどういうことか説明するために、次のfor文を見てみます。
 
-```
+```python
 for i in range(0,last_word):
     output.append(input[i:i+num])
 ```
@@ -281,7 +282,7 @@ for i in range(0,last_word):
 #### 問題
 "paraparaparadise"と"paragraph"に含まれる文字bi-gramの集合を，それぞれ, XとYとして求め，XとYの和集合，積集合，差集合を求めよ．さらに，'se'というbi-gramがXおよびYに含まれるかどうかを調べよ．
 #### 回答
-```
+```python
 #!/usr/local/bin python3.6
 # -*- coding: utf-8 -*-
 
@@ -337,9 +338,25 @@ print ("se" in Y)
 #### 問題
 引数x, y, zを受け取り「x時のyはz」という文字列を返す関数を実装せよ．さらに，x=12, y="気温", z=22.4として，実行結果を確認せよ．
 #### 回答
-```
+```python
+#!/usr/local/bin python3.6
+# -*- coding: utf-8 -*-
+
+x = 12
+y = "気温"
+z = 22.4
+
+def tenki(x,y,z):
+    return str(x) + u"時の" + y + u"は" + str(z)
+
+print(tenki(x,y,z))
+
+# 結果
+# 12時の気温は22.4
 ```
 #### 解説
+文字列の連結は`+`でできるようです。`x`と`z`は`int`なので、`str`に変換するために、`str()`を使用しています。
+
 ### 08. 暗号文
 #### 問題
 与えられた文字列の各文字を，以下の仕様で変換する関数cipherを実装せよ．
