@@ -219,6 +219,7 @@ print (dict)
 for文では`enumerate`関数を使います。`enumerate`関数を使うとループする際にインデックスつきで要素を得ることができます。引数に数値を指定することで、カウントアップの数値の起点を指定する事ができます。今回は`1`からスタートです。
 
 次にif文でリストにある要素と一致した場合を条件としたいので、`in`を使えばよさそうです。
+
 参考：[リスト内に特定の要素があるかでif分岐 - Qiita](https://qiita.com/clarinet758/items/43fdc786685e7c13abf5)
 
 辞書への値の追加は`辞書[キー] = 値`で追加、更新ができます。キーは数字で、値を元素にします。結果、1から順に元素が並んで出力されました。元素をキーにすると順番がバラバラになるので、その場合は`sorted`を使って並び替えてあげるとわかりやすそうです。順番はばらばらでも、課題としては正解です。
@@ -228,8 +229,50 @@ for文では`enumerate`関数を使います。`enumerate`関数を使うとル�
 与えられたシーケンス（文字列やリストなど）からn-gramを作る関数を作成せよ．この関数を用い，"I am an NLPer"という文から単語bi-gram，文字bi-gramを得よ．
 #### 回答
 ```
+#!/usr/local/bin python3.6
+# -*- coding: utf-8 -*-
+
+def ngram(input,num):
+    last_word = len(input) - num + 1
+    output = []
+    for i in range(0,last_word):
+        output.append(input[i:i+num])
+    return output
+
+str = "I am an NLPer"
+# 文字bi-gram
+print(ngram(str,2))
+# 単語bi-gram
+print(ngram(str.split(),2))
+
+# 結果
+# ['I ', ' a', 'am', 'm ', ' a', 'an', 'n ', ' N', 'NL', 'LP', 'Pe', 'er']
+# [['I', 'am'], ['am', 'an'], ['an', 'NLPer']]
 ```
 #### 解説
+`n-gram`とは、「隣合うN個の塊」のことを指します。`単語n-gram`や`文字n-gram`があり、例えば「金持ち喧嘩せず」の文字 2-gram(bi-gram) は {金持, 持ち, ち喧, 喧嘩, 嘩せ, せず} となります。
+
+参考：[自然言語処理はじめました - Ngramを数え上げまくる](https://www.slideshare.net/phyllo/ngram-10539181)
+
+今回は、n-gramを返す関数を実装せよ、という課題ですので、`def`で関数を定義します。`()`内には引数として定義する変数を入れましょう。
+
+`last_word`は、入力された文字列の長さからngramで取り出したい文字数を引いて1加えたものです。これがどういうことか説明するために、次のfor文を見てみます。
+
+```
+for i in range(0,last_word):
+    output.append(input[i:i+num])
+```
+
+`range`は連続した数字のオブジェクトを作るための関数です。
+
+[【Python入門】range関数を使ってリストを作ろう！ | 侍エンジニア塾ブログ | プログラミング入門者向け学習情報サイト](https://www.sejuku.net/blog/23145)
+
+このfor文の変数`i`の実行範囲は、ゼロから`last_word`、つまり今回の文字列の長さ13から`num`を引いて1加えた値、今回のbi-gramだと12がセットされます。tri-gramだったら11です。
+
+次に、`output`リストに`input`をスライスした値を入力していくわけです。そうすると、bi-gramであれば順々に2文字ずつ取り出され、`i+num`が最後の文字に到達したときにforが終了します。
+
+あとは、この関数`ngram`で得られた結果（return）を表示してあげるだけです。
+
 ### 06. 集合
 #### 問題
 "paraparaparadise"と"paragraph"に含まれる文字bi-gramの集合を，それぞれ, XとYとして求め，XとYの和集合，積集合，差集合を求めよ．さらに，'se'というbi-gramがXおよびYに含まれるかどうかを調べよ．

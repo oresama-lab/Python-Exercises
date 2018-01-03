@@ -1,10 +1,10 @@
-#!/usr/local/bin python3.6
-# -*- coding: utf-8 -*-
+def ngram(input,num):
+    last_word = len(input) - num + 1
+    output = []
+    for i in range(0,last_word):
+        output.append(input[i:i+num])
+    return output
 
-str = "Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can."
-str = str.replace('.', "")
-str = str.replace(',', "")
-str = str.split()
+str = "I am an NLPer"
 
-for (num, word) in enumerate(str,1):
-    print (word[:1])
+print(len(str))
