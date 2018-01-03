@@ -366,8 +366,36 @@ print(tenki(x,y,z))
 この関数を用い，英語のメッセージを暗号化・復号化せよ．
 #### 回答
 ```
+#!/usr/local/bin python3.6
+# -*- coding: utf-8 -*-
+
+def cipher(input):
+    output = ""
+    for i in input:
+        if i.islower():
+            output += chr(219 - ord(i))
+        else:
+            output += i
+    return output
+
+input = "If you can dream it, you can do it."
+coded = cipher(input)
+
+print(cipher(input))
+print(cipher(coded))
+# 結果
+# Iu blf xzm wivzn rg, blf xzm wl rg.
+# If you can dream it, you can do it.
 ```
 #### 解説
+`ord`は組み込み関数で、「1 文字の Unicode 文字を表す文字列に対し、その文字の Unicode コードポイントを表す整数を返します。例えば、 ord('a') は整数 97 を返し、 ord('€') (ユーロ記号) は 8364 を返します。これは chr() の逆です。」というものです。
+
+`chr`も組み込み関数で「Unicode コードポイントが整数 i である文字を表す文字列を返します。例えば chr(97) は文字列 'a' を、 chr(8364) は文字列 '€' を返します。 ord() の逆です。」というものです。
+
+参考：[2. 組み込み関数 — Python 3.6.3 ドキュメント](https://docs.python.jp/3/library/functions.html)
+
+ということがわかれば、あとは簡単。for文で文字を1つずつ読み込み、小文字だったら変換処理をして`output`に値を格納、そうでなければそのまま`output`に値を格納すればOkです。
+
 ### 09. Typoglycemia
 #### 問題
 スペースで区切られた単語列に対して，各単語の先頭と末尾の文字は残し，それ以外の文字の順序をランダムに並び替えるプログラムを作成せよ．ただし，長さが４以下の単語は並び替えないこととする．適当な英語の文（例えば"I couldn't believe that I could actually understand what I was reading : the phenomenal power of the human mind ."）を与え，その実行結果を確認せよ．
