@@ -282,8 +282,57 @@ for i in range(0,last_word):
 "paraparaparadise"と"paragraph"に含まれる文字bi-gramの集合を，それぞれ, XとYとして求め，XとYの和集合，積集合，差集合を求めよ．さらに，'se'というbi-gramがXおよびYに含まれるかどうかを調べよ．
 #### 回答
 ```
+#!/usr/local/bin python3.6
+# -*- coding: utf-8 -*-
+
+def ngram(input,num):
+    last_word = len(input) - num + 1
+    output = []
+    for i in range(0,last_word):
+        output.append(input[i:i+num])
+    return output
+
+str0 = "paraparaparadise"
+str1 = "paragraph"
+
+X = set(ngram(str0,2))
+Y = set(ngram(str1,2))
+
+print (X)
+# ['pa', 'ar', 'ra', 'ap', 'pa', 'ar', 'ra', 'ap', 'pa', 'ar', 'ra', 'ad', 'di', 'is', 'se']
+print (Y)
+# ['pa', 'ar', 'ra', 'ag', 'gr', 'ra', 'ap', 'ph']
+
+# 和集合
+union = X | Y
+print (union)
+
+# 積集合
+intersection = X & Y
+print (intersection)
+
+# 差集合
+difference = X -Y
+print (difference)
+
+# 'se'というbi-gramがXおよびYに含まれるか
+print ("se" in X)
+print ("se" in Y)
+
+# 結果
+# {'se', 'ap', 'di', 'is', 'ra', 'ar', 'pa', 'ad'}
+# {'ap', 'ag', 'ph', 'ra', 'gr', 'pa', 'ar'}
+# {'se', 'ap', 'ag', 'di', 'ph', 'is', 'ra', 'ar', 'pa', 'gr', 'ad'}
+# {'ap', 'ra', 'pa', 'ar'}
+# {'se', 'ad', 'is', 'di'}
+# True
+# False
 ```
 #### 解説
+これは割りと書いてある通り、集合の作り方をそのままやればOK。
+
+包含判定については、`in`を使うことで、`True` or `False`の判定ができる。
+
 ### 07. テンプレートによる文生成
 #### 問題
 引数x, y, zを受け取り「x時のyはz」という文字列を返す関数を実装せよ．さらに，x=12, y="気温", z=22.4として，実行結果を確認せよ．
