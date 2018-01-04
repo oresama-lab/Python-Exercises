@@ -590,17 +590,41 @@ root@42b42e8d10d6:/share/chapter2# diff 11-py.kekka 11-bash.kekka
 #### 問題
 各行の1列目だけを抜き出したものをcol1.txtに，2列目だけを抜き出したものをcol2.txtとしてファイルに保存せよ．確認にはcutコマンドを用いよ．
 #### 回答
+地味にcutコマンドの使い方分からなかったので調べました。こんな感じ。
 ```
-
+root@42b42e8d10d6:/share/chapter2# cut -f 1 ./hightemp.txt > col1.txt
+root@42b42e8d10d6:/share/chapter2# cut -f 2 ./hightemp.txt > col2.txt
 ```
 #### 解説
 ### 13. col1.txtとcol2.txtをマージ
 #### 問題
 12で作ったcol1.txtとcol2.txtを結合し，元のファイルの1列目と2列目をタブ区切りで並べたテキストファイルを作成せよ．確認にはpasteコマンドを用いよ．
 #### 回答
+シェルでの確認はこちら。
 ```
+root@42b42e8d10d6:/share/chapter2# paste col1.txt col2.txt
+```
+Pythonコードはこちら。
+```
+#!/usr/local/bin python3.6
+# -*- coding: utf-8 -*-
+# 11.py
+import re
+
+file = "./hightemp.txt"
+f = open(file,mode='r')
+col1 = open('col1.txt',mode='w')
+col2 = open('col2.txt',mode='w')
+
+for line in f:
+    cols = line.split()
+    col1.write(cols[0] + "\n")
+    col2.write(cols[1] + "\n")
+
+f.close()
 ```
 #### 解説
+テキストファイルへの書き込みは`mode='w'`を指定する必要があります。
 ### 14. 先頭からN行を出力
 #### 問題
 自然数Nをコマンドライン引数などの手段で受け取り，入力のうち先頭のN行だけを表示せよ．確認にはheadコマンドを用いよ．
