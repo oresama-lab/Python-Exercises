@@ -645,9 +645,35 @@ with open('merge.txt', 'w') as output:
 #### 問題
 自然数Nをコマンドライン引数などの手段で受け取り，入力のうち先頭のN行だけを表示せよ．確認にはheadコマンドを用いよ．
 #### 回答
-```
+```python
+#!/usr/local/bin python3.6
+# -*- coding: utf-8 -*-
+# 14.py
+
+import sys
+
+arg = sys.argv
+with open("hightemp.txt","r") as txt:
+    lines = txt.readlines()
+
+for i in range(0,int(arg[1])):
+    print(lines[i].rstrip())
+    i = i + 1
 ```
 #### 解説
+引数のコマンドラインからの受取には`argv`が使えそうです。試しに以下のコードで確認してみます。
+```python
+import sys
+args = sys.argv
+print(args)
+# 結果
+# $ python3.6 test.py a b c
+['test.py', 'a', 'b', 'c']
+```
+リストで引数が入っていることがわかります。
+
+ですので、引数の1つ目までを範囲として行を表示すればよいです。
+
 ### 15. 末尾のN行を出力
 #### 問題
 自然数Nをコマンドライン引数などの手段で受け取り，入力のうち末尾のN行だけを表示せよ．確認にはtailコマンドを用いよ．
