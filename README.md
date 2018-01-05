@@ -595,15 +595,6 @@ root@42b42e8d10d6:/share/chapter2# diff 11-py.kekka 11-bash.kekka
 root@42b42e8d10d6:/share/chapter2# cut -f 1 ./hightemp.txt > col1.txt
 root@42b42e8d10d6:/share/chapter2# cut -f 2 ./hightemp.txt > col2.txt
 ```
-#### 解説
-### 13. col1.txtとcol2.txtをマージ
-#### 問題
-12で作ったcol1.txtとcol2.txtを結合し，元のファイルの1列目と2列目をタブ区切りで並べたテキストファイルを作成せよ．確認にはpasteコマンドを用いよ．
-#### 回答
-シェルでの確認はこちら。
-```
-root@42b42e8d10d6:/share/chapter2# paste col1.txt col2.txt
-```
 Pythonコードはこちら。
 ```
 #!/usr/local/bin python3.6
@@ -625,6 +616,31 @@ f.close()
 ```
 #### 解説
 テキストファイルへの書き込みは`mode='w'`を指定する必要があります。
+
+### 13. col1.txtとcol2.txtをマージ
+#### 問題
+12で作ったcol1.txtとcol2.txtを結合し，元のファイルの1列目と2列目をタブ区切りで並べたテキストファイルを作成せよ．確認にはpasteコマンドを用いよ．
+#### 回答
+シェルでの確認はこちら。
+```
+root@42b42e8d10d6:/share/chapter2# paste col1.txt col2.txt
+```
+Pythonコードはこちら。
+```python
+#!/usr/local/bin python3.6
+# -*- coding: utf-8 -*-
+# 13.py
+
+with open('col1.txt') as col1, open('col2.txt') as col2:
+    line1, line2 = col1.readlines(), col2.readlines()
+
+with open('merge.txt', 'w') as output:
+    for i,j in zip(line1,line2):
+        output.write(i.rstrip() + "\t" + j.rstrip() + "\n")
+```
+#### 解説
+`col1.txt`と`col2.txt`のそれぞれを`with`で開いて行をすべて読み込みます。次に`merge.txt`を開いて、1行ずつ処理した結果を書き込みます。
+
 ### 14. 先頭からN行を出力
 #### 問題
 自然数Nをコマンドライン引数などの手段で受け取り，入力のうち先頭のN行だけを表示せよ．確認にはheadコマンドを用いよ．
